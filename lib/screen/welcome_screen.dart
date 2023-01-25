@@ -45,6 +45,18 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             (
             height: 10,
           ),
+          Column
+            (
+            children:
+            [
+              const Text("Whatever You will Ask, You'll get an Answer"),
+              const SizedBox
+                (
+                height: 100,
+              ),
+
+            ],
+          ),
         ]
       ),
     );
