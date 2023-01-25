@@ -2,8 +2,23 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
 
+import '../widget/chat_message.dart';
+
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
+
+
+
+
+
+
+
+  @override
+  State<ChatPage> createState() => _ChatPage();
+}
+
+class _ChatPage extends State<ChatPage> {
+
 
   static const apiKey = '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';
   Future<HttpClientResponse> sendRequest(String prompt) async {
@@ -23,12 +38,33 @@ class ChatPage extends StatefulWidget {
     return response;
   }
 
+  void sendMessage(message) async {
+    final response = await sendRequest(message);
+    if (response.statusCode == 200) {
+      final completions =
+      json.decode(await response.transform(utf8.decoder).join())['choices'];
+      for (var completion in completions) {
+        print(completion['text']);
+        _messages.insert(
+            0, ChatMessage(text: completion['text'], sender: "OpenAI"));
+      }
+      setState(() {});
+    } else {
+      print("Error Here!");
+    }
+  }
 
-  @override
-  State<ChatPage> createState() => _ChatPage();
-}
 
-class _ChatPage extends State<ChatPage> {
+
+
+  final TextEditingController _controller = TextEditingController();
+  final List<ChatMessage> _messages = [];
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
