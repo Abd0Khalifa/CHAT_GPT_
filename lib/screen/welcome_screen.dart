@@ -1,4 +1,5 @@
 
+import 'package:chatgpt/screen/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget
@@ -54,9 +55,25 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 (
                 height: 100,
               ),
+              ElevatedButton
+                (
+                onPressed: ()
+                {
+                  Navigator.push
+                    (
+                      context,
+                      MaterialPageRoute
+                        (
+                        builder: (context) => const ChatPage(),
+                      )
+                  );
+                },
+                child: const Text("Begin Chatting!"),
+              )
 
             ],
           ),
+
         ]
       ),
     );
