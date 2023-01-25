@@ -89,8 +89,19 @@ class _ChatPage extends State<ChatPage> {
         leading: Image.asset("assets/images/ChatGPT_Icon.png"),
       ),
       body: Column(
-        children: <Widget>[
+        children: <Widget>
+        [
 
+          Flexible(
+            child: ListView.builder(
+              reverse: true,
+              padding: const EdgeInsets.all(8.0),
+              itemBuilder: (_, index) {
+                return _messages[index];
+              },
+              itemCount: _messages.length,
+            ),
+          ),
         ],
       ),
     );
